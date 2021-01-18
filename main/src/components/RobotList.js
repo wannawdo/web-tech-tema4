@@ -11,6 +11,7 @@ class RobotList extends Component {
 		this.state = {
 			robots : []
 		}
+		this.onAdd=this.onAdd.bind(this);
 	}
 	componentDidMount(){
 		this.store = new RobotStore()
@@ -23,10 +24,23 @@ class RobotList extends Component {
 			})			
 		})
 	}
+
+	onAdd(name, type, mass){
+		if (!name || !type || !mass)
+		    console.log("Fields cannot be empty!");
+		  else {
+		    let newRobot = {
+		      name: name, 
+		      type:type,
+		      mass:mass,
+			};
+		}
+    }
+
 	render() {
 		return (
 			<div>
-				 
+				 <RobotForm onAdd={this.onAdd}/>
 				{
 					this.state.robots.map((e, i) => 
 						<Robot item={e} key={i} />
@@ -36,5 +50,6 @@ class RobotList extends Component {
 		)
 	}
 }
+
 
 export default RobotList
